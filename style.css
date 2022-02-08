@@ -1,0 +1,397 @@
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden;
+    user-select: none;
+    background-image: linear-gradient(to bottom, #613453, #324563);
+}
+
+.background {
+    background-image: url(images/bgtexture.png);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-repeat: repeat;
+    object-fit: contain;
+}
+
+.yourMom {
+    position: absolute;
+    transform-origin:center;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12vw;
+    color: white;
+    -webkit-text-stroke: 0.5vw white;
+    z-index: 100;
+    width: 100%;
+    text-align: center;
+}
+
+.start {
+    position:absolute;
+    text-align: center;
+    transform:translate(-50%,-50%);
+    top:50%;
+    left:50%;
+    padding:1% 2% 1% 2%;
+    background-color: black;
+    color: rgb(0,100,255);
+    -webkit-text-stroke: 0.5vw rgb(0,255,50);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    box-shadow: 0vw 0vw 1vw black;
+    text-shadow: 0vw 0vw 2vw rgb(0,255,50);
+    font-size: 8.5vw;
+    z-index: 1;
+    animation: starthoverrev 0.5s linear 1;
+    animation-timing-function:cubic-bezier(0.175, 1, 0, 1.4);
+    animation-fill-mode: forwards;
+}
+
+.start:hover {
+    animation: starthover 0.5s linear 1;
+    animation-timing-function:cubic-bezier(0.175, 1, 0, 1.4);
+    animation-fill-mode: forwards;
+}
+
+@keyframes starthover {
+    0% {
+        font-size: 8.5vw;
+        background-color: black;
+        color: rgb(0,255,50);
+        -webkit-text-stroke: 0.5vw rgb(0,255,50);
+        box-shadow: 0vw 0vw 1vw black;
+        text-shadow: 0vw 0vw 2vw rgb(0,255,50);
+    }
+
+    100% {
+        font-size: 9.5vw;
+        background-color: rgb(0,255,50);
+        color: black;
+        -webkit-text-stroke: 0.5vw black;
+        box-shadow: 0vw 0vw 2vw rgb(0,255,50);
+        text-shadow: 0vw 0vw 1vw black;
+    }
+}
+
+@keyframes starthoverrev {
+    0% {
+        font-size: 9.5vw;
+        background-color: rgb(0,255,50);
+        color: black;
+        -webkit-text-stroke: 0.5vw black;
+        box-shadow: 0vw 0vw 2vw rgb(0,255,50);
+        text-shadow: 0vw 0vw 1vw black;
+    }
+    100% {
+        font-size: 8.5vw;
+        background-color: black;
+        color: rgb(0,255,50);
+        -webkit-text-stroke: 0.5vw rgb(0,255,50);
+        box-shadow: 0vw 0vw 1vw black;
+        text-shadow: 0vw 0vw 2vw rgb(0,255,50);
+    }
+}
+
+@keyframes disappear {
+    0% {
+        font-size: 9.5vw;
+        opacity: 1;
+        background-color: rgb(0,255,50);
+        color: black;
+        -webkit-text-stroke: 0.5vw black;
+        box-shadow: 0vw 0vw 2vw rgb(0,255,50);
+        text-shadow: 0vw 0vw 1vw black;
+    }
+    100% {
+        font-size: 8.5vw;
+        opacity: 0;
+        background-color: black;
+        color: rgb(0,255,50);
+        -webkit-text-stroke: 0.5vw rgb(0,255,50);
+        box-shadow: 0vw 0vw 1vw black;
+        text-shadow: 0vw 0vw 2vw rgb(0,255,50);
+    }
+}
+
+.money {
+    width: 95%;
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%,-50%) rotate(0deg);
+    z-index: 5;
+    color: white;
+    -webkit-text-stroke: 0.2vw rgb(255,225,150);
+    text-shadow: 0 0 0.5vw rgb(255,225,150);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 3.5vw;
+    text-align: left;
+}
+
+.moneyAppear {
+    width: 95%;
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+    transform: translate(-50%,-50%) rotate(0deg);
+    z-index: 5;
+    color: white;
+    -webkit-text-stroke: 0.2vw rgb(255,225,150);
+    text-shadow: 0 0 0.5vw rgb(255,225,150);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 3.5vw;
+    text-align: left;
+    animation: moneyAppearAnim 0.5s ease 1;
+}
+
+@keyframes moneyAppearAnim {
+    0% {
+        font-size: 0vw;
+    }
+    100% {
+        font-size: 3.5vw;
+    }
+}
+
+.moneyEarned {
+    animation: moneyEarnedAnim 0.25s ease 1;
+    animation-fill-mode: forwards;
+    animation-timing-function:cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes moneyEarnedAnim {
+    0% {
+        font-size: 3.85vw;
+    }
+    100% {
+        font-size: 3.5vw;
+    }
+}
+.enemyAppear {
+    position: absolute;
+    animation-timing-function:cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    background-color: red;
+    box-shadow: 0 0 2.5vw red;
+    padding: 6vw;
+    border-radius: 15%;
+    top: 50%;
+    right: 10%;
+    transform: translate(-50%,-50%) rotate(0deg);
+    z-index: 10;
+    animation: enemyAppearAnim 1s ease 1;
+    transform-origin: center;
+}
+.enemy {
+    position: absolute;
+    animation-timing-function:cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    background-color: red;
+    box-shadow: 0 0 2.5vw red;
+    padding: 6vw;
+    border-radius: 15%;
+    top: 50%;
+    right: 10%;
+    transform: translate(-50%,-50%) rotate(0deg);
+    z-index: 10;
+    transform-origin: center;
+}
+.enemyHit {
+    position: absolute;
+    animation-timing-function:cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    background-color: rgb(255,150,150);
+    box-shadow: 0 0 2.5vw rgb(255,150,150);
+    padding: 6vw;
+    border-radius: 15%;
+    top: 50%;
+    right: 10%;
+    transform: translate(-50%,-50%) rotate(0deg);
+    z-index: 10;
+    animation: enemyHitAnim 0.15s ease 1;
+    transform-origin: center;
+}
+@keyframes enemyHitAnim {
+    0% {
+        top: 50%;
+        right: 7%;
+        transform: translate(-50%,-50%) rotate(10deg);
+    }
+    50% {
+        top: 50%;
+        right: 10.5%;
+        transform: translate(-50%,-50%) rotate(-2deg);
+    }
+    100% {
+        top: 50%;
+        right: 10%;
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+}
+
+@keyframes enemyAppearAnim {
+    0%{
+        right: -20%;
+        transform: translate(-50%,-50%) rotate(-20deg);
+        padding: 4vw;
+    }
+    50%{
+        right: 15%;
+        transform: translate(-50%,-50%) rotate(-240deg);
+        padding: 6vw;
+    }
+    100%{
+        right: 10%;
+        transform: translate(-50%,-50%) rotate(-180deg);
+    }
+}
+
+.hitParticle {
+    position: absolute;
+    animation-timing-function:cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    background-color: red;
+    box-shadow: 0 0 1vw red;
+    padding: 2vw;
+    border-radius: 5%;
+    top: 50%;
+    right: 10%;
+    transform: translate(-50%,-50%) rotate(0deg);
+    z-index: 5;
+}
+
+.oofText {
+    position: absolute;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2vw;
+    transform:translate(-50%,-50%);
+    text-align: center;
+    color: white;
+    z-index: 11;
+}
+
+.player {
+    animation-timing-function:cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: absolute;
+    background-color: rgb(0,255,50);
+    box-shadow: 0 0 1.5vw rgb(0,255,50);
+    padding: 2vw;
+    border-radius: 15%;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%,-50%) rotate(0deg);
+}
+.playerAppear {
+    animation: playerAppearAnim 1s ease 1;
+    animation-fill-mode: forwards;
+}
+@keyframes playerAppearAnim {
+    0% {
+        left: 15%;
+        padding: 0vw;
+        opacity: 0;
+    }
+    50% {
+        left: 22%;
+        padding: 2.2vw;
+        opacity: 1;
+    }
+    100% {
+        left: 20%;
+        padding: 2vw;
+    }
+}
+.playerFire {
+    animation: playerFireAnim .25s ease 1;
+    animation-fill-mode: forwards;
+    animation-timing-function:cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: absolute;
+    background-color: rgb(0,255,50);
+    box-shadow: 0 0 1.5vw rgb(0,255,50);
+    padding: 2vw;
+    border-radius: 25%;
+    border: 0.1vw solid black;
+    top: 50%;
+    transform: translate(-50%,-50%) rotate(0deg);
+}
+@keyframes playerFireAnim {
+    0% {
+        left: 20%;
+        padding: 2vw;
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+    100% {
+        left: 20%;
+        padding: 2vw;
+        transform: translate(-50%,-50%) rotate(90deg);
+    }
+}
+
+.basic {
+    position: absolute;
+    padding: 0.5vw 2vw 0.5vw 2vw;
+    background-color: rgb(0,255,50);
+    box-shadow: 0 0 0.5vw rgb(0,255,50);
+    transform: translate(-50%,-50%) rotate(0deg);
+}
+
+.upgradeCost {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    color:white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 4vw;
+    transform: translate(-50%,-50%);
+    z-index: 40
+}
+
+.upgradeDesc {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    color:white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 2vw;
+    transform: translate(-50%,-50%);
+    z-index: 40;
+    text-align: center;
+    width: auto;
+}
+
+
+.upRed {
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    padding: 2vw;
+    background-color: black;
+    border: 0.5vw solid rgb(255,0,0);
+    box-shadow: 0 0 0.5vw rgb(255,0,0);
+    transform: translate(-50%,-50%) rotate(45deg);
+}
+
+.upRed:hover {
+    padding: 2.5vw;
+    cursor: pointer;
+    background-color: white;
+    box-shadow: 0 0 1.5vw rgb(255,0,0);
+}
+
+.upPurchase {
+    animation: upPurchaseAnim 1s ease 1;
+    animation-timing-function:cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes upPurchaseAnim {
+    0% {
+        transform: translate(-50%,-50%) rotate(-45deg);
+    }
+    100% {
+        transform: translate(-50%,-50%) rotate(45deg);
+    }
+}

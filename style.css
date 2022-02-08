@@ -371,6 +371,16 @@ body {
     width: auto;
 }
 
+.upimg {
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    filter: none; 
+-webkit-filter: blur(0px); 
+-moz-filter: blur(0px); 
+-ms-filter: blur(0px);
+filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
+}
 
 .upRed {
     position: absolute;
@@ -402,4 +412,18 @@ body {
     100% {
         transform: translate(-50%,-50%) rotate(45deg);
     }
+}
+
+.upRedIcon {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 8vw;
+    height: 8vw;
+    padding: 2vw;
+    background-color: black;
+    border: 0.75vw solid rgb(255,0,0);
+    box-shadow: 0 0 1vw rgb(255,0,0);
+    transform: translate(-50%,-50%) rotate(0deg);
+    z-index: 101;
 }

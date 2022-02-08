@@ -31,6 +31,7 @@ upgradeDescVis.classList.add('upgradeDesc');
 bodyvar.appendChild(upgradeCostVis);
 bodyvar.appendChild(upgradeDescVis);
 
+let upRedValue = 0;
 let upRedCost = 50;
 let upRedDesc = 'Unlock an upgrade for your weapon';
 let upgradeRed = document.createElement('div');
@@ -38,6 +39,9 @@ upgradeRed.classList.add('upRed')
 
 let upgradeBG = document.createElement('div');
 upgradeBG.classList.add('upBG');
+upgradeBG.addEventListener('mouseover', function() {
+    upgradeCostVis.innerHTML = 'Choose your upgrade';
+})
 
 
 let bulletType = 'Basic'
@@ -115,6 +119,7 @@ function startGame() {
                     money -= y;
                     updateMoney();
                     x.classList.add('upPurchase');
+                    upRedValue++
                     setTimeout(() => {
                         x.classList.remove('upPurchase');
                     }, 1000);
@@ -125,11 +130,15 @@ function startGame() {
 
         function chooseYourUpgrade(x) {
             bodyvar.appendChild(upgradeBG);
-            setTimeout(() => {
-                upgradeCostVis.innerHTML = 'Choose your upgrade';
-            }, 1);
             if(x == upgradeRed) {
-
+                let upButton1 = document.createElement('div');
+                upButton1.classList.add('upRedIcon');
+                upButton1.style.left = '25%'
+                bodyvar.appendChild(upButton1);
+                let upButton1Img = document.createElement('img');
+                upButton1Img.classList.add('upimg')
+                upButton1Img.setAttribute('src','images/Upgrade A1.png')
+                upButton1.appendChild(upButton1Img);
             }
         }
 

@@ -36,6 +36,10 @@ let upRedDesc = 'Unlock an upgrade for your weapon';
 let upgradeRed = document.createElement('div');
 upgradeRed.classList.add('upRed')
 
+let upgradeBG = document.createElement('div');
+upgradeBG.classList.add('upBG');
+
+
 let bulletType = 'Basic'
 let bulletVal = 1;
 let money = 0;
@@ -106,6 +110,7 @@ function startGame() {
         }
 
         function buyUpgrade(x,y) {
+            if(x == upgradeRed) {
                 if(money >= y) {
                     money -= y;
                     updateMoney();
@@ -113,10 +118,22 @@ function startGame() {
                     setTimeout(() => {
                         x.classList.remove('upPurchase');
                     }, 1000);
+                    chooseYourUpgrade(upgradeRed);
                 }
+            }
         }
 
-        document.addEventListener('keydown', logKey);
+        function chooseYourUpgrade(x) {
+            bodyvar.appendChild(upgradeBG);
+            setTimeout(() => {
+                upgradeCostVis.innerHTML = 'Choose your upgrade';
+            }, 1);
+            if(x == upgradeRed) {
+
+            }
+        }
+
+        document.addEventListener('keyup', logKey);
 
         function logKey(e) {
             let key = ` ${e.code}`
@@ -127,6 +144,8 @@ function startGame() {
                 updateMoney();
                } else if (key == ' KeyP') {
                    makeyourMom();
+               } else if (key == ' KeyL') {
+                   money = 1000000
                }
         }
 

@@ -20,6 +20,14 @@ body {
     object-fit: contain;
 }
 
+.upBG {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 100;
+}
+
 .yourMom {
     position: absolute;
     transform-origin:center;
@@ -127,7 +135,7 @@ body {
     bottom: 0%;
     left: 50%;
     transform: translate(-50%,-50%) rotate(0deg);
-    z-index: 5;
+    z-index: 500;
     color: white;
     -webkit-text-stroke: 0.2vw rgb(255,225,150);
     text-shadow: 0 0 0.5vw rgb(255,225,150);
@@ -347,7 +355,7 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 4vw;
     transform: translate(-50%,-50%);
-    z-index: 40
+    z-index: 102;
 }
 
 .upgradeDesc {
@@ -358,7 +366,7 @@ body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 2vw;
     transform: translate(-50%,-50%);
-    z-index: 40;
+    z-index: 102;
     text-align: center;
     width: auto;
 }

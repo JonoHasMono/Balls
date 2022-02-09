@@ -34,16 +34,23 @@ upgradeDescVis.classList.add('upgradeDesc');
 bodyvar.appendChild(upgradeCostVis);
 bodyvar.appendChild(upgradeDescVis);
 
+let upgradeColor = '';
+let upgradeLetter = '';
+let desc1 = '';
+
 let upRedValue = 0;
 let upRedCost = 50;
 let upRedDesc = 'Unlock an upgrade for your weapon';
 let upgradeRed = document.createElement('div');
 upgradeRed.classList.add('upRed')
+let upRed1 = "Quickfire"
+let upRed1Desc = "Every shot has a chance to quickly fire off multiple shots"
 
 let upgradeBG = document.createElement('div');
 upgradeBG.classList.add('upBG');
 upgradeBG.addEventListener('mouseover', function() {
     upgradeCostVis.innerHTML = 'Choose your upgrade';
+    upgradeDescVis.innerHTML = '';
 })
 
 
@@ -136,16 +143,29 @@ function startGame() {
         function chooseYourUpgrade(x) {
             bodyvar.appendChild(upgradeBG);
             if(x == upgradeRed) {
+                upgradeColor = 'Red';
+                upgradeLetter = "A";
+                desc1 = upRed1Desc;
+                }
                 let upButton1 = document.createElement('div');
                 upButton1.classList.add('upRedIcon');
                 upButton1.style.left = '25%'
+                upButton1.addEventListener('click',confirmUpgrade);
+                upButton1.addEventListener('mouseover', function() {
+                    upgradeDescVis.innerHTML = desc1;
+                })
                 bodyvar.appendChild(upButton1);
                 let upButton1Img = document.createElement('img');
                 upButton1Img.classList.add('upimg')
-                upButton1Img.setAttribute('src','images/Upgrade A1.png')
+                upButton1Img.setAttribute('src','images/Upgrade ' + upgradeLetter + '1.png')
                 upButton1.appendChild(upButton1Img);
+    
+                function confirmUpgrade() {
+
+                }
             }
-        }
+        
+
 
         document.addEventListener('keyup', logKey);
 

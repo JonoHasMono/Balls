@@ -23,6 +23,9 @@ let enemy = document.createElement('div');
 let playerCube = document.createElement('div');
 playerCube.classList.add('player');
 
+let clickArea = document.createElement('div');
+clickArea.classList.add('clickArea');
+
 let blankCost = ''
 let upgradeCostVis = document.createElement('div');
 upgradeCostVis.classList.add('upgradeCost');
@@ -63,6 +66,8 @@ function startGame() {
             setTimeout(() => {
                 moneyVis.classList.remove('moneyAppear');
                 moneyVis.classList.add('money');
+                bodyvar.appendChild(clickArea);
+                clickArea.addEventListener('click', chooseBullet);
             }, 1000);
             moneyVis.innerHTML = "$" + money
             bodyvar.appendChild(moneyVis)

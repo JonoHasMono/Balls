@@ -54,6 +54,7 @@ let upRed2Active = false;
 let upRed3Active = false;
 
 let laserCharge = 0;
+let drillCharged = true;
 
 let upRedValue = 0;
 let upRedCost = 50;
@@ -82,7 +83,8 @@ let reloadSpeed = 2000;
 let bulletType = 'Basic'
 let globalDmgVal = 1;
 let bulletBasicVal = globalDmgVal;
-let laserBeamVal = globalDmgVal * 3;
+let laserBeamVal = globalDmgVal * 5;
+let dmissileVal = globalDmgVal * 3;
 let money = 0;
 let moneyVis = document.createElement('div');
 
@@ -251,7 +253,7 @@ function startGame() {
                         upRed1Active = true;
                     } if(upgrade2Value == 'r2') {
                         upRed2Active = true;
-                    } if(upgrade2Value == 'r3') {
+                    } if(upgrade3Value == 'r3') {
                         upRed3Active = true;
                     }
                     
@@ -353,7 +355,92 @@ function startGame() {
                         }, 250);
                     }
                 }
+                
                 //! Twin Drills
+                if(upRed3Active == true) {
+                    if(drillCharged == true) {
+                        drillCharged = false;
+                        setTimeout(() => {
+                            drillCharged = true;
+                        }, 5000);
+                        let drillMissile1 = document.createElement('img');
+                        drillMissile1.classList.add('dmissile1');
+                        drillMissile1.setAttribute('src', 'images/Drill Missile.png');
+                        let drillMissile2 = document.createElement('img');
+                        drillMissile2.classList.add('dmissile2');
+                        drillMissile2.setAttribute('src', 'images/Drill Missile.png');
+                        bodyvar.appendChild(drillMissile1);
+                        bodyvar.appendChild(drillMissile2);
+                        let drillMissile1s = document.createElement('img');
+                        drillMissile1s.classList.add('dmissile1');
+                        drillMissile1s.setAttribute('src', 'images/Drill Missile.png');
+                        let drillMissile2s = document.createElement('img');
+                        drillMissile2s.classList.add('dmissile2');
+                        drillMissile2s.setAttribute('src', 'images/Drill Missile.png');
+                        drillMissile1s.style.opacity = '0.5'
+                        drillMissile2s.style.opacity = '0.5'
+                        drillMissile1s.style.zIndex = 4
+                        drillMissile2s.style.zIndex = 4
+                        setTimeout(() => {
+                            bodyvar.appendChild(drillMissile1s);
+                            bodyvar.appendChild(drillMissile2s);
+                        }, 25);
+                        let drillMissile1ss = document.createElement('img');
+                        drillMissile1ss.classList.add('dmissile1');
+                        drillMissile1ss.setAttribute('src', 'images/Drill Missile.png');
+                        let drillMissile2ss = document.createElement('img');
+                        drillMissile2ss.classList.add('dmissile2');
+                        drillMissile2ss.setAttribute('src', 'images/Drill Missile.png');
+                        drillMissile1ss.style.opacity = '0.25'
+                        drillMissile2ss.style.opacity = '0.25'
+                        drillMissile1ss.style.zIndex = 3
+                        drillMissile2ss.style.zIndex = 3
+                        setTimeout(() => {
+                            bodyvar.appendChild(drillMissile1ss);
+                            bodyvar.appendChild(drillMissile2ss);
+                        }, 35);
+                        setTimeout(() => {
+                            bodyvar.removeChild(drillMissile1);
+                            enemyHit(dmissileVal);
+                            bodyvar.removeChild(drillMissile2);
+                            enemyHit(dmissileVal);
+                            setTimeout(() => {
+                                bodyvar.removeChild(drillMissile1s);
+                                bodyvar.removeChild(drillMissile2s);
+                            }, 25);
+                            setTimeout(() => {
+                                bodyvar.removeChild(drillMissile1ss);
+                                bodyvar.removeChild(drillMissile2ss);
+                            }, 35);
+                        }, 790);
+                        //moveMissile(1);
+
+                        function moveMissile(x) {
+                            if(x == 1) {
+                                 if(posX1 <= 35) {
+                                    posX1 += (0.5 / posXSpeed)
+                                    posY1 -= (5 / (posXSpeed * 8))
+                                    posXSpeed += 0.1 * 1.05
+                                    drillMissile1.style.left = posX1 + '%';
+                                    drillMissile1.style.top = posY1 + '%';
+                                } else if(posX1 <= 75) {
+                                    if(arcPeak == false) {
+                                        arcPeak = true;
+                                        posXSpeed = 0;
+                                    }
+                                    posY1 += (posXSpeed / 15);
+                                    posXSpeed += 0.01 * 1.05;
+                                    posX1 += posXSpeed;
+                                    drillMissile1.style.left = posX1 + '%';
+                                    drillMissile1.style.top = posY1 + '%';
+                                }
+                            }
+                            setTimeout(() => {
+                                moveMissile(x)
+                            }, 5);
+                        }
+                    }
+                }
 
             setTimeout(() => {
                 let bullet = document.createElement('div');
@@ -367,12 +454,12 @@ function startGame() {
 
                 function moveBullet() {
                     if(posX <= 75) {
-                        bulletSpeed += 0.02;
+                        bulletSpeed += 0.1;
                         posX += bulletSpeed;
                         bullet.style.left = posX + "%";
                          setTimeout(() => {
                             moveBullet();
-                         }, 5);
+                         }, 10);
                     } else {
                         bodyvar.removeChild(bullet);
                         enemyHit(bulletBasicVal);
@@ -388,7 +475,7 @@ function startGame() {
         let hitMoney = x
         updateMoney();
         //generateOof();
-        moneyEarnedText(hitMoney);
+        //moneyEarnedText(hitMoney);
         makeHitParticles();
         enemy.classList.remove('enemy');
         enemy.classList.add('enemyHit');
@@ -500,7 +587,7 @@ function startGame() {
             moveParticle();
             setTimeout(() => {
                 bodyvar.removeChild(hitParticle);
-            }, 500);
+            }, 350);
             function moveParticle() {
                 posX += randomSpeedX;
                 posY += randomSpeedY;
@@ -510,7 +597,7 @@ function startGame() {
                 hitParticle.style.top = posY + '%';
                 setTimeout(() => {
                     moveParticle();
-                }, 5);
+                }, 10);
             }
         }
     }

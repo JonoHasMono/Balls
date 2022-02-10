@@ -23,6 +23,9 @@ let enemy = document.createElement('div');
 let playerCube = document.createElement('div');
 playerCube.classList.add('player');
 
+let ammoCount = document.createElement('div');
+ammoCount.classList.add('ammoCount');
+
 let clickArea = document.createElement('div');
 clickArea.classList.add('clickArea');
 
@@ -37,14 +40,33 @@ bodyvar.appendChild(upgradeDescVis);
 let upgradeColor = '';
 let upgradeLetter = '';
 let desc1 = '';
+let desc2 = '';
+let desc3 = '';
+let upName1 = '';
+let upName2 = '';
+let upName3 = '';
+let upgrade1Value = '';
+let upgrade2Value = '';
+let upgrade3Value = '';
+
+let upRed1Active = false;
+let upRed2Active = false;
+let upRed3Active = false;
+
+let laserCharge = 0;
 
 let upRedValue = 0;
 let upRedCost = 50;
 let upRedDesc = 'Unlock an upgrade for your weapon';
 let upgradeRed = document.createElement('div');
 upgradeRed.classList.add('upRed')
+
 let upRed1 = "Quickfire"
 let upRed1Desc = "Every shot has a chance to quickly fire off multiple shots"
+let upRed2 = "Laser Beam"
+let upRed2Desc = "Every 10th shot fires a powerful laser beam"
+let upRed3 = "Twin Drills"
+let upRed3Desc = "Every shot has a chance to fire twin drills"
 
 let upgradeBG = document.createElement('div');
 upgradeBG.classList.add('upBG');
@@ -53,9 +75,14 @@ upgradeBG.addEventListener('mouseover', function() {
     upgradeDescVis.innerHTML = '';
 })
 
-
+let reloading = false;
+let playerAmmo = 10;
+let playerMaxAmmo = playerAmmo;
+let reloadSpeed = 2000;
 let bulletType = 'Basic'
-let bulletVal = 1;
+let globalDmgVal = 1;
+let bulletBasicVal = globalDmgVal;
+let laserBeamVal = globalDmgVal * 3;
 let money = 0;
 let moneyVis = document.createElement('div');
 
@@ -66,6 +93,7 @@ function startGame() {
         console.log('Start Button clicked');
         startButton.style.animation = 'disappear 0.1s ease 1';
         startButton.style.animationFillMode = 'forwards';
+        updateAmmo();
     
         setTimeout(() => {
             bodyvar.removeChild(startButton);
@@ -91,8 +119,11 @@ function startGame() {
 
         bodyvar.appendChild(playerCube);
         playerCube.classList.add('playerAppear');
+        bodyvar.appendChild(ammoCount);
+        ammoCount.classList.add('ammoCountAppear');
         setTimeout(() => {
             playerCube.classList.remove('playerAppear');
+            ammoCount.classList.remove('ammoCountAppear');
         }, 1000);
 
         function updateMoney() {
@@ -120,7 +151,7 @@ function startGame() {
                 upgradeCostVis.innerHTML = "$" + (x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 upgradeDescVis.innerHTML = y;
             } else {
-                upgradeCostVis.innerHTML = ""
+                upgradeCostVis.innerHTML = "";
                 upgradeDescVis.innerHTML = "";
             }
         }
@@ -145,23 +176,85 @@ function startGame() {
             if(x == upgradeRed) {
                 upgradeColor = 'Red';
                 upgradeLetter = "A";
+                upgradeValue = 'r';
                 desc1 = upRed1Desc;
+                upName1 = upRed1;
+                desc2 = upRed2Desc;
+                upName2 = upRed2;
+                desc3 = upRed3Desc;
+                upName3 = upRed3;
                 }
                 let upButton1 = document.createElement('div');
-                upButton1.classList.add('upRedIcon');
+                upButton1.classList.add('up' + upgradeColor + 'Icon');
                 upButton1.style.left = '25%'
+                upButton1.addEventListener('click', function() {
+                    upgrade1Value = upgradeValue + 1;
+                })
                 upButton1.addEventListener('click',confirmUpgrade);
                 upButton1.addEventListener('mouseover', function() {
                     upgradeDescVis.innerHTML = desc1;
+                    upgradeCostVis.innerHTML = upName1;
                 })
                 bodyvar.appendChild(upButton1);
                 let upButton1Img = document.createElement('img');
                 upButton1Img.classList.add('upimg')
                 upButton1Img.setAttribute('src','images/Upgrade ' + upgradeLetter + '1.png')
                 upButton1.appendChild(upButton1Img);
+                
+                
+                let upButton2 = document.createElement('div');
+                upButton2.classList.add('up' + upgradeColor + 'Icon');
+                upButton2.style.left = '50%'
+                upButton2.addEventListener('click', function() {
+                    upgrade2Value = upgradeValue + 2;
+                })
+                upButton2.addEventListener('click',confirmUpgrade);
+                upButton2.addEventListener('mouseover', function() {
+                    upgradeDescVis.innerHTML = desc2;
+                    upgradeCostVis.innerHTML = upName2;
+                })
+                bodyvar.appendChild(upButton2);
+                let upButton2Img = document.createElement('img');
+                upButton2Img.classList.add('upimg')
+                upButton2Img.setAttribute('src','images/Upgrade ' + upgradeLetter + '2.png')
+                upButton2.appendChild(upButton2Img);
+
+
+                let upButton3 = document.createElement('div');
+                upButton3.classList.add('up' + upgradeColor + 'Icon');
+                upButton3.style.left = '75%'
+                upButton3.addEventListener('click', function() {
+                    upgrade3Value = upgradeValue + 3;
+                })
+                upButton3.addEventListener('click',confirmUpgrade);
+                upButton3.addEventListener('mouseover', function() {
+                    upgradeDescVis.innerHTML = desc3;
+                    upgradeCostVis.innerHTML = upName3;
+                })
+                bodyvar.appendChild(upButton3);
+                let upButton3Img = document.createElement('img');
+                upButton3Img.classList.add('upimg')
+                upButton3Img.setAttribute('src','images/Upgrade ' + upgradeLetter + '3.png')
+                upButton3.appendChild(upButton3Img);
     
                 function confirmUpgrade() {
-
+                    bodyvar.removeChild(upgradeBG);
+                    bodyvar.removeChild(upButton1);
+                    upButton1.removeChild(upButton1Img);
+                    bodyvar.removeChild(upButton2);
+                    upButton2.removeChild(upButton2Img);
+                    bodyvar.removeChild(upButton3);
+                    upButton3.removeChild(upButton3Img);
+                    upgradeCostVis.innerHTML = "";
+                    upgradeDescVis.innerHTML = "";
+                      if(upgrade1Value == 'r1') {
+                        upRed1Active = true;
+                    } if(upgrade2Value == 'r2') {
+                        upRed2Active = true;
+                    } if(upgrade2Value == 'r3') {
+                        upRed3Active = true;
+                    }
+                    
                 }
             }
         
@@ -194,16 +287,74 @@ function startGame() {
         }
 
         function chooseBullet() {
-            if(bulletType == 'Basic') {
-                fireWeapon1('basic')
+            playerAmmo--
+            if(playerAmmo < 10) {
+                if(reloading == false) {
+                    reloading = true;
+                    setTimeout(() => {
+                        playerAmmo = playerMaxAmmo;
+                        reloading = false;
+                        updateAmmo();
+                    }, reloadSpeed);
+                }
+            } if(playerAmmo >= 0) {
+                if(bulletType == 'Basic') {
+                    fireWeapon1('basic')
+                }
             }
+            updateAmmo();
+        }
+
+        function updateAmmo() {
+            let mainAmmoColor = 'white';
+            if(mainAmmoColor == 'white') {
+                ammoCount.style.backgroundColor = 'rgb(255,255,255'
+                setTimeout(() => {
+                    mainAmmoColor = 'normal';
+                    ammoCount.style.backgroundColor = 'rgb(0,255,50'
+                }, 100);
+            }
+            let ammoVis = (playerAmmo / playerMaxAmmo) * 100
+            ammoCount.style.paddingTop = (ammoVis / 8)+ '%';
+            ammoCount.style.paddingBottom = (ammoVis / 8)+ '%';
         }
 
         function fireWeapon1(x) {
+            //! Quickfire
+            if(upRed1Active == true) {
+                let quickfireChance = Math.random();
+                if(quickfireChance <= 0.05) {
+                    setTimeout(() => {
+                        fireBullet();
+                    }, 50);
+                    setTimeout(() => {
+                        fireBullet();
+                    }, 100);
+                }
+            }
+
             playerCube.classList.remove('playerFire');
             setTimeout(() => {
                 playerCube.classList.add('playerFire');
-            }, 1);
+            }, 50);
+            fireBullet();
+            function fireBullet() {
+                //! Laser Beam
+                if(upRed2Active == true) {
+                    laserCharge++
+                    if(laserCharge >= 10) {
+                        laserCharge = 0;
+                        let laser = document.createElement('div')
+                        laser.classList.add('laser');
+                        bodyvar.appendChild(laser);
+                        enemyHit(laserBeamVal);
+                        setTimeout(() => {
+                            bodyvar.removeChild(laser);
+                        }, 250);
+                    }
+                }
+                //! Twin Drills
+
             setTimeout(() => {
                 let bullet = document.createElement('div');
                 bullet.classList.add(x);
@@ -224,17 +375,20 @@ function startGame() {
                          }, 5);
                     } else {
                         bodyvar.removeChild(bullet);
-                        enemyHit();
+                        enemyHit(bulletBasicVal);
                   }
                 }
             }, 50);
         }
+        }
     }
 
-    function enemyHit() {
-        money += bulletVal;
+    function enemyHit(x) {
+        money += x;
+        let hitMoney = x
         updateMoney();
-        generateOof();
+        //generateOof();
+        moneyEarnedText(hitMoney);
         makeHitParticles();
         enemy.classList.remove('enemy');
         enemy.classList.add('enemyHit');
@@ -270,6 +424,41 @@ function startGame() {
         bodyvar.appendChild(oofText);
         setTimeout(() => {
             bodyvar.removeChild(oofText);
+        }, 1000);
+    }
+
+    function moneyEarnedText(x) {
+        let moneyEarnedVis = document.createElement('div');
+        moneyEarnedVis.classList.add('moneyEarnedVis');
+        let randomX = (Math.random() * 10) + 15;
+        let randomY = (Math.random() * 10) + 45;
+        let randomSize = (Math.random() * 2) + 3;
+        let moneyOpacity = 1;
+        moneyEarnedVis.style.right = randomX + "%";
+        moneyEarnedVis.style.top = randomY + "%";
+        moneyEarnedVis.style.fontSize = randomSize + 'vw';
+        moneyEarnedVis.innerHTML = x;
+        bodyvar.appendChild(moneyEarnedVis);
+        moveMoneyText();
+        setTimeout(() => {
+            disappearMoneyText();
+        }, 250);
+        function moveMoneyText() {
+            randomY -= 0.1;
+            moneyEarnedVis.style.top = randomY + "%";
+            setTimeout(() => {
+                moveMoneyText();
+            }, 5);
+        }
+        function disappearMoneyText() {
+            moneyOpacity -= 0.01;
+            moneyEarnedVis.style.opacity = moneyOpacity;
+            setTimeout(() => {
+                disappearMoneyText();
+            }, 5);
+        }
+        setTimeout(() => {
+            bodyvar.removeChild(moneyEarnedVis);
         }, 1000);
     }
 
@@ -311,7 +500,7 @@ function startGame() {
             moveParticle();
             setTimeout(() => {
                 bodyvar.removeChild(hitParticle);
-            }, 1000);
+            }, 500);
             function moveParticle() {
                 posX += randomSpeedX;
                 posY += randomSpeedY;

@@ -327,7 +327,6 @@ body {
 }
 .playerFire {
     animation: playerFireAnim .25s ease 1;
-    animation-fill-mode: forwards;
     animation-timing-function:cubic-bezier(0.68, -0.55, 0.265, 1.55);
     position: absolute;
     background-color: rgb(0,255,50);
@@ -341,13 +340,39 @@ body {
 @keyframes playerFireAnim {
     0% {
         left: 20%;
-        padding: 2vw;
+        padding: 2.5vw;
         transform: translate(-50%,-50%) rotate(0deg);
     }
     100% {
         left: 20%;
         padding: 2vw;
-        transform: translate(-50%,-50%) rotate(90deg);
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+}
+
+.ammoCount {
+    animation-timing-function:cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: absolute;
+    background-color: rgb(0,255,50);
+    box-shadow: 0 0 0.5vw rgb(0,255,50);
+    padding: 0vw 1vw 0vw 1vw;
+    padding-top: 50%;
+    top: 50%;
+    left: 4.75%;
+    transform: translate(-50%,-50%) rotate(0deg);
+}
+
+.ammoCountAppear {
+    animation: acAppearAnim 1s ease 1;
+    animation-timing-function:cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes acAppearAnim {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
 
@@ -357,6 +382,49 @@ body {
     background-color: rgb(0,255,50);
     box-shadow: 0 0 0.5vw rgb(0,255,50);
     transform: translate(-50%,-50%) rotate(0deg);
+}
+
+.laser {
+    position: absolute;
+    padding: 0.5vw 2vw 10vw 2vw;
+    background-color: white;
+    transform: translate(-50%,-50%) rotate(0deg);
+    animation: laserAnim 0.25s ease 1;
+    top: 50%;
+    left: 63.5%;
+}
+
+@keyframes laserAnim {
+    0% {
+        padding: 0.25vw 80% 0.25vw 2vw;
+        box-shadow: 0 0 1vw rgb(255,0,0);
+        border: 0.5vw solid rgb(255,0,0);
+    }
+    33% {
+        padding: 1.25vw 80% 1.25vw 2vw;
+        box-shadow: 0 0 1vw rgb(0,255,0);
+        border: 0.5vw solid rgb(0,255,0);
+    }
+    66% {
+        padding: 1vw 80% 1vw 2vw;
+        box-shadow: 0 0 1vw rgb(0,0,255);
+        border: 0.5vw solid rgb(0,0,255);
+    }
+    100% {
+        padding: 0.25vw 80% 0.25vw 2vw;
+        box-shadow: 0 0 1vw rgb(255,0,0);
+        border: 0.5vw solid rgb(255,0,0);
+    }
+}
+
+.moneyEarnedVis {
+    position: absolute;
+    color:white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 6vw;
+    -webkit-text-stroke: 0.1vw black;
+    transform: translate(-50%,-50%);
+    z-index: 102;
 }
 
 .upgradeCost {
